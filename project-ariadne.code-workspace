@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "Project ARIADNE",
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "files.associations": {
+      "LICENSE": "plaintext",
+    },
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "prettier.requireConfig": true,
+    "[yaml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+  },
+}
