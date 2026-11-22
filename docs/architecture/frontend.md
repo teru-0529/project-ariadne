@@ -121,8 +121,6 @@ Frontend Domain Modelは取得データを業務概念として表現し、入�
 3. Frontend Domain ModelがWails生成モデルからFrontend側の業務モデルへの変換を担う。
 4. PageやEntryはFrontend側の業務モデルに基づいて表示・操作する。
 
-取得・変換・保持・表示の責務を分ける。モデルの具体的な型・生成方法・リアクティブな連携方法は、各Featureの設計で定める。
-
 ### 登録・更新
 
 1. Pageが入力モデルを参照し、登録・更新要求を準備する。
