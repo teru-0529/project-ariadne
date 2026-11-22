@@ -10,7 +10,7 @@ PROJECT ARIADNEは、**Business Modelを中心としたアーキテクチャ**�
 
 1. **Business Model中心**：業務概念・ルール・整合性はBusiness Modelが保証し、Serviceはユースケースを組み立てる。
 2. **責務に基づく分離**：Frontend・Wails Boundary・Service・Business Model・Persistence Adapterの責務を明確にする。コードの類似性だけを理由に共通化しない。
-3. **正本の明確化**：業務定義は単一の`ariadne.yaml`を正本とする。Business Model・Public Model・Frontend Storeは、それぞれ異なる目的を持つ。
+3. **正本の明確化**：永続化する業務定義の正本は、単一の`ariadne.yaml`とする。アプリケーション内部では、各情報の責務に応じて正本を明確にし、同じ状態を複数箇所で独立して管理しない。
 4. **各層の成立条件**：Frontendは画面・操作という断面での成立条件を扱い、BackendはBusiness Model全体の整合性を保証する。
 5. **段階的な具体化**：基本原則を前提とし、具体的な処理分担・連携方式は必要なFeatureの設計時に決定する。
 
@@ -44,7 +44,7 @@ flowchart TD
 
 Serviceは永続化の具体的なAdapterではなく、Persistence Portの抽象に依存する。
 
-Business Model・Public Model・Frontend Storeは同じ情報を扱う場合でも責務が異なる。各モデルの具体的な変換・保持・更新の方法は、対応するアーキテクチャ文書で扱う。
+Business Model・Public Model・Frontend Domain Modelは、それぞれ異なる責務を持つ。Frontend StoreはBackendから取得したデータを保持し、Frontend Domain ModelはFrontend側の業務概念を表現する。具体的な変換・保持・更新の方法は、対応するアーキテクチャ文書で扱う。
 
 ## Architecture Documents
 
@@ -56,7 +56,6 @@ Business Model・Public Model・Frontend Storeは同じ情報を扱う場合で�
 - [Data & Persistence](persistence.md)
 - [Cross-cutting Concerns](cross-cutting.md)
 
-上記リンク先は各文書の作成後に有効となる。
 
 ## Source
 
