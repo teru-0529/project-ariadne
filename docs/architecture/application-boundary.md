@@ -14,12 +14,13 @@ Application Boundaryは、FrontendとBackendの接続構造および責務境界
 | 要素 | 責務 |
 |---|---|
 | Frontend | Backendへの要求と、受け取った結果の利用 |
-| Binding（Frontend側） | Wails生成コードへの依存を集約する |
+| Binding（Frontend側） | Wailsが自動生成するBindingコードへの依存を集約する |
 | Wails Boundary | FrontendとBackendの呼び出しを接続する |
+| Backend側Boundary | Public ModelとBackend内部モデルの変換、エラー変換、ログ出力 |
 | Application Service | 要求に応じた処理の実行と結果の返却 |
 | Public Model | FrontendとBackendの境界を越えるデータ表現 |
 
-Frontendからの呼び出しは、Frontend側のBinding、Wails Boundaryを経由してBackendのApplication Serviceへ接続する。
+Frontendからの呼び出しは、Frontend側のBinding、Wails Boundary、Backend側Boundaryを経由してBackendのApplication Serviceへ接続する。
 
 ## 3. Data Boundary
 
@@ -27,18 +28,16 @@ Frontendからの呼び出しは、Frontend側のBinding、Wails Boundaryを経�
 |---|---|
 | 要求データ | FrontendからBackendへ渡すデータはPublic Modelで表現する |
 | 応答データ | BackendからFrontendへ返すデータはPublic Modelで表現する |
-| Backend側の変換 | Backend内部モデルとPublic Modelの変換を担う |
-| Frontend側の変換 | Wails生成モデルとFrontend内部モデルの変換を担う |
-
-「境界用の公開型」という別のモデル概念は設けない。
+| Backend側の変換 | Backend側BoundaryがPublic ModelとBackend内部モデルを変換する。要求時はPublic ModelからBackend内部モデルへ、応答時はその逆方向に変換する |
+| Frontend側の変換 | StoreがWails生成モデルからFrontend内部モデルへ変換する |
 
 ## 4. Responsibility & Error Boundary
 
 Application Serviceは要求に応じた処理を実行し、結果を返す。Frontendは受け取った結果を利用し、画面の状態や表示を制御する。
 
-Backendで判定したエラーは、Frontendが解釈できる形式で伝える。Backend内部のエラー表現をそのまま公開することは前提としない。
+Backend側Boundaryは、Backend内部のエラーをFrontendが解釈できる形式へ変換し、ログを出力する。Backend内部のエラー表現をそのまま公開することは前提としない。
 
-Frontendはエラーの内容に応じてFieldへの表示やToastなどの表示方法を判断する。Backendは表示先や表示方法を決定しない。
+Frontendは受け取ったエラーをToastで通知する。BackendはToastの表示を直接制御しない。
 
 ## 5. Design Boundaries & Evolution
 
