@@ -63,9 +63,13 @@ Frontend Domain Modelは、Backendから取得した情報をFrontend側の業�
 
 Frontend Domain ModelはStoreが保持する取得データの変更に追従する。具体的な型、生成方法、リアクティブな連携方法はCoreで設計する。
 
-### 入力モデルとField
+命名規則は`<業務概念>`とし、`Task`、`Element`、`Table`など、業務概念そのものを名前とする。`Model`接尾辞は付けない。
 
-入力モデルは個々のFieldを参照し、入力全体のValidityや変更差分をリアクティブに集約・導出する。**現在の入力値の正本は各Field**であり、入力モデルが同じ現在値を別途保持することはしない。
+### Frontend Input Model
+
+Frontend Input Modelは個々のFieldを参照し、入力全体のValidityや変更差分をリアクティブに集約・導出する。**現在の入力値の正本は各Field**であり、Frontend Input Modelが同じ現在値を別途保持することはしない。
+
+命名規則は`<業務概念>Input`とし、`TaskInput`、`ElementInput`、`TableInput`など、対応する業務概念に`Input`を付ける。
 
 ### Single / Correlation Validation
 
