@@ -69,14 +69,16 @@ Frontend Domain ModelはStoreが保持する取得データの変更に追従す
 
 ### Single / Correlation Validation
 
-| 対象 | 判定処理 | Validity状態の保持 |
+**Validatorはチェック処理のみを担い、呼び出し元がValidityを保持する。** この責務分担はSingle ValidationとCorrelation Validationに共通する。
+
+| 区分 | チェック処理 | 呼び出し元・Validityの保持 |
 |---|---|---|
-| Single Validation | 各Fieldに対応する単項目検証 | Field |
-| Correlation Validation | 具体的なValidatorが相関チェックを実行 | 呼び出し元のEntry／RowEntry |
+| Single Validation | Validator | Field |
+| Correlation Validation | Validator | Entry／RowEntry |
 
-Correlation Validatorは**チェック処理のみ**を担い、Validityの状態を保持しない。通常の入力ではEntry、表形式編集ではRowEntryが相関Validityの状態を保持する。
+Single ValidationではFieldがValidatorを呼び出して結果を保持する。Correlation ValidationではEntry、表形式編集ではRowEntryがValidatorを呼び出して結果を保持する。Validator自身はValidityの状態を保持しない。
 
-この分離は、相関チェックが複数存在することを前提に、判定ごとに状態を持つValidatorインスタンスを設けることによるメモリ・性能上の懸念を避けるためである。Validatorの具体的なインスタンス生成方式までは、ここでは固定しない。
+この分離には、相関チェックが複数存在する場合に、判定ごとに状態を持つValidatorインスタンスを設けることによるメモリ・性能上の懸念を避ける意図もある。Validatorの具体的なインスタンス生成方式までは、ここでは固定しない。
 
 汎用Validation基盤は共通的な判定の仕組みを提供し、具体的な業務ルールはFeature固有のValidatorに置く。入力モデルはFieldおよびEntry／RowEntryが保持する結果を参照し、入力全体の成立状態を導出する。
 
