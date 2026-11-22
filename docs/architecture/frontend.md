@@ -61,7 +61,7 @@ Fieldには、`TextField`などの汎用Fieldと、`TaskStatusField`などのFea
 
 Frontend Domain Modelは、Backendから取得した情報をFrontend側の業務概念として表す。Wails生成モデルとFrontend内部の業務モデルを分離し、Wails生成モデルからの変換はFrontend Domain Model側に閉じ込める。
 
-Frontend Domain ModelはStoreが保持する取得データの変更に追従する。具体的な型、生成方法、リアクティブな連携方法はCoreで設計する。
+Frontend Domain ModelはStoreが保持する取得データの変更に追従する。具体的な型、生成方法、リアクティブな連携方法は各Featureの設計で実施する。
 
 命名規則は`<業務概念>`とし、`Task`、`Element`、`Table`など、業務概念そのものを名前とする。`Model`接尾辞は付けない。
 
@@ -94,7 +94,7 @@ ContextはFeature内の現在画面情報の正本となる。ManagementはConte
 
 ### Store
 
-StoreはBackendからのデータ取得と取得結果の保持を担う。Prototypeの非同期Factoryによる生成方式を継続し、CoreではStoreをリアクティブ化して取得データの変更をFrontend Domain Modelに反映できるようにする。
+StoreはBackendからのデータ取得と取得結果の保持を担う。Prototypeの非同期Factoryによる生成方式を継続し、Storeをリアクティブ化して取得データの変更をFrontend Domain Modelに反映できるようにする。
 
 ただし、**すべての画面にStoreを必須とはしない**。Backend取得データを前提としない新規作成画面などでは、画面の性質に応じてStoreの要否を判断する。
 
@@ -121,7 +121,7 @@ Frontend Domain Modelは取得データを業務概念として表現し、入�
 3. Frontend Domain ModelがWails生成モデルからFrontend側の業務モデルへの変換を担う。
 4. PageやEntryはFrontend側の業務モデルに基づいて表示・操作する。
 
-取得・変換・保持・表示の責務を分ける。具体的な呼出し順序、モデル生成・更新の方式はCore初期設計で確定する。
+取得・変換・保持・表示の責務を分ける。モデルの具体的な型・生成方法・リアクティブな連携方法は、各Featureの設計で定める。
 
 ### 登録・更新
 
@@ -134,7 +134,7 @@ Frontend Domain Modelは取得データを業務概念として表現し、入�
 
 ## 6. Navigation & Lifecycle
 
-画面遷移では、Prototypeで成立した**`prepare → commit`**を継続する。遷移先データの準備に成功した場合のみ画面切替を確定し、失敗時は現在画面と状態を維持する。
+画面遷移では、Prototypeで成立した **`prepare → commit`** を継続する。遷移先データの準備に成功した場合のみ画面切替を確定し、失敗時は現在画面と状態を維持する。
 
 離脱確認にはCallback方式を継続する。各画面が必要に応じて離脱可否を判断し、Shell・Management・Pageがそれぞれの責務に従って、離脱確認、遷移先準備、画面切替を連携させる。
 
@@ -142,9 +142,9 @@ Feature離脱時の状態破棄や再選択時の初期化など、個別の画�
 
 ## 7. Design Boundaries & Evolution
 
-本書はFrontendの共通構造と責務分担を記録する。具体的なディレクトリ構成、クラス、公開関数、状態連携の実装方法は、必要なCore設計の段階で確定する。
+本書はFrontendの共通構造と責務分担を記録する。具体的なディレクトリ構成、クラス、公開関数、状態連携の実装方法は、必要な設計の段階で確定する。
 
-Excelライクな編集、コピー＆ペースト、ListTable拡張、Page内タブ、Side Navigation拡張などは、Feature固有の設計・検証を進め、その結果に応じて**本書にも必要なアーキテクチャ上の決定事項を追記する**。初版に記載がないことは、将来の追記対象から除外する意味ではない。
+Excelライクな編集、コピー＆ペースト、ListTable拡張、Page内タブ、Side Navigation拡張などは、Feature固有の設計・検証を進め、その結果に応じて **本書にも必要なアーキテクチャ上の決定事項を追記する**。初版に記載がないことは、将来の追記対象から除外する意味ではない。
 
 モデル間の依存関係や変更整合性など、Frontendだけでは成立しない条件については、Backend・Model側の設計との責務境界を維持する。
 
