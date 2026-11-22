@@ -26,39 +26,30 @@ Backendは以下の論理要素で構成する。
 
 コード上の依存関係は次の原則に従う。
 
-- Application ServiceはBusiness ModelおよびPersistence Portに依存する。
-- Persistence AdapterはPersistence Portを実装し、必要に応じてBusiness Modelを参照する。
-- Business ModelはApplication ServiceやPersistence Adapterに依存しない。
-- Application ServiceはPersistence Adapterの具体的な実装に依存しない。
-
-依存関係と実行時の処理順序は区別する。
+| 要素 | 依存関係 |
+|---|---|
+| Application Service | Business ModelとPersistence Portに依存し、Persistence Adapterの具体的な実装には依存しない |
+| Business Model | Application ServiceやPersistence Adapterに依存しない |
+| Persistence Adapter | Persistence Portを実装し、必要に応じてBusiness Modelを参照する |
 
 ## 4. Data Representation
 
-Backendでは、責務に応じてデータ表現を分離する。
+Backendでは、Business Modelを基に、責務に応じたデータ表現を分離する。
 
 | データ表現 | 位置づけ |
 |---|---|
 | Business Model | 業務ルールと整合性を持つ内部表現 |
-| Public Model | Backendの境界を越えて公開するデータ表現 |
-| Persistence Model | 永続化形式に対応するデータ表現 |
+| Public Model | Business Modelの写像として、Backendの境界を越えて公開するデータ表現 |
+| Persistence Model | Business Modelの保存に必要な情報を、永続化形式に合わせて表すデータ表現 |
 
-Business Modelを公開形式や保存形式と同一視しない。
+Public ModelとPersistence ModelはBusiness Modelに対応するが、公開や保存に必要な情報・構造はそれぞれ異なる。そのため、Business Modelそのものを公開・保存用のデータ表現として兼用することは前提としない。
 
 データ表現の変換は、それぞれの境界を担当する要素が責任を持つ。具体的な型、変換処理、データ構造は個別設計で定義する。
 
-## 5. Design Boundaries
+## 5. Design Boundaries & Evolution
 
-Backend Architectureは、Backend内部の論理構造と依存原則を定義する。
+本書はBackend内部の共通構造と責務分担を記録する。具体的なディレクトリ構成、クラス、公開関数、個別の業務モデルや操作・検証ルールは、必要な設計の段階で確定する。
 
-他のArchitecture文書との責務分担は次のとおり。
+永続化の構造と実現方式はPersistence Architecture、FrontendとBackendの接続契約はApplication Boundary、複数の構成要素にまたがる事項はCross-cutting Concernsで扱う。システム全体の構成はOverall / System Architectureで定義する。
 
-| 文書 | 主な対象 |
-|---|---|
-| Overall / System Architecture | システム全体の構成 |
-| Backend Architecture | Backend内部の責務と依存関係 |
-| Application Boundary | FrontendとBackendの接続契約 |
-| Persistence Architecture | 永続化の構造と実現方式 |
-| Cross-cutting Concerns | 複数の構成要素にまたがる共通事項 |
-
-個別の業務モデル、操作、検証ルール、保存データの構造は、この文書では定義しない。
+各Featureの設計・検証を通じてBackendの共通構造に関わる決定が生じた場合は、本書にも必要なアーキテクチャ上の決定事項を追記する。
