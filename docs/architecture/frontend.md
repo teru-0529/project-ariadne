@@ -19,31 +19,41 @@ Frontendは、Business Modelが表現する業務概念に基づく表示・操�
 | `Shell` | Feature選択、Feature間の離脱調整、通知状態などのアプリケーション全体の制御 |
 | `AriadneShell` | アプリケーション共通の表示構造 |
 
-### Management / Page / Entry
+### Management / Page / Entry・ListTable・View / Field
 
-| 構成要素 | 責務 |
-|---|---|
-| Feature固有の`Management` | Feature内の画面選択、Context、離脱確認、Backend書込み実行と実行後の画面更新 |
-| `AriadneManagement` | Side NavigationとPage領域の共通表示構造 |
-| Feature固有の`Page` | 画面固有の操作・状態、登録・更新要求の準備 |
-| `AriadnePage` | タイトル、操作領域、コンテンツ領域などの共通ページ枠 |
-| Feature固有の`Entry` | 入力項目の構成、入力モデル・Validationとの連携 |
-| `AriadneForm` | 共通Form UI、Submit確認UIとその内部の表示制御 |
+Feature内の構造階層は、次のとおりとする。
+
+```text
+Management
+└── Page
+    └── Entry / ListTable / View
+        └── Field
+```
+
+Entry・ListTable・Viewは同じ階層に位置し、画面の用途に応じて用いる。各階層の具体的な部品は、対応するARIADNE共通構造部品を利用する。
+
+| Feature側の構成要素 | Feature側の責務 | 対応する共通構造部品とその責務 |
+|---|---|---|
+| `Management` | Feature内の画面選択、Context、離脱確認、Backend書込み実行と実行後の画面更新 | `AriadneManagement`：Side NavigationとPage領域の共通表示構造 |
+| `Page` | 画面固有の操作・状態、登録・更新要求の準備 | `AriadnePage`：タイトル、操作領域、コンテンツ領域などの共通ページ枠 |
+| `Entry` | 入力項目の構成、入力モデル・Validationとの連携 | `AriadneForm`：共通Form UI、Submit確認UIとその内部の表示制御 |
+| `ListTable` / `View` | 一覧・参照に関するFeature固有の情報と操作判断 | `AriadneListTable` / `AriadneView`：共通表示構造とイベント通知 |
+| `Field` | 入力値、単項目Validity、入力・検証に関する具体的な振る舞い | `AriadneField`：共通表示構造とエラー表示。Validityは保持しない |
 
 Pageは描画専用ではない。登録・更新ではPageが入力モデルから要求を準備し、ManagementがBackendへの書込みと成功後の画面更新を制御する。
 
-### ARIADNE共通部品とFeature固有部品
+### ARIADNE共通構造部品と共通利用部品
 
-**Feature固有部品は業務固有の情報・判断・操作を担い、ARIADNE共通部品は共通の表示構造とイベント通知を担う。** ただし、共通部品を一律に「制御を持たない部品」とはしない。
+ARIADNE共通部品は、**Featureの構造階層に対応する共通構造部品**と、**階層に依存せず利用する共通利用部品**に分けて整理する。
 
-- `AriadneView`、`AriadneListTable`、`AriadneSideNavigation`など：業務固有の判断は利用側に置き、共通部品は表示とイベント通知を担う。
-- `AriadneField`：Fieldの共通表示構造を担う。
-- `AriadneModal`：Confirm／Cancelや二重実行防止など、Modal内部で完結する制御を担う。
-- `AriadneForm`：Submit確認のUIと内部制御を担う。
-- `AriadneToast`：表示時間を管理し、終了を通知する。通知内容と表示状態はShellが管理する。
-- `AriadnePage`：参照／編集Toggle等の操作を配置する領域を提供するが、現在のモードや保存・キャンセルの判断はFeatureが管理する。
+- **共通構造部品**：`AriadneShell`、`AriadneManagement`、`AriadnePage`、`AriadneForm`、`AriadneListTable`、`AriadneView`、`AriadneField`など。各階層の具体的な部品と組み合わせて、共通の表示構造を提供する。`AriadneSideNavigation`もManagementの表示構造に用いる。
+- **共通利用部品**：Modal、Toast、Toggle、Navigation、Buttonなど。Featureの構造階層そのものを表すものではなく、必要な場所から利用する。
 
-共通部品とFeature固有部品の境界は、見た目の類似性ではなく責務に基づいて定める。
+Fieldには`TextField`などの汎用Fieldと、`TaskStatusField`などのFeature固有Fieldがある。**いずれも`AriadneField`と組み合わせて利用する**点は同じである。`AriadneField`はエラーの「表示」を共通化し、入力値やValidityの状態を保持しない。状態管理と検証は具体的なField側が担う。
+
+共通部品を一律に「制御を持たない部品」とはしない。`AriadneModal`はConfirm／Cancelや二重実行防止などModal内部の制御を担い、`AriadneForm`はSubmit確認UIと内部制御を担う。`AriadneToast`は表示時間を管理して終了を通知し、通知内容と表示状態はShellが管理する。`AriadnePage`はToggle等を配置する領域を提供するが、現在のモードや保存・キャンセルの判断はFeatureが管理する。
+
+共通部品と具体的な部品の境界は、見た目の類似性ではなく責務に基づいて定める。
 
 ## 3. Frontend Models & Validation
 
