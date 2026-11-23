@@ -11,26 +11,26 @@ Application Boundaryは、FrontendとBackendの接続構造および責務境界
 
 ## 2. Logical Structure
 
-| 要素 | 責務 |
-| --- | --- |
-| Frontend | Backendへの要求と、受け取った結果の利用 |
-| Wails Binding | Goで定義したBackend側Boundaryを基に、Wailsが自動生成するTypeScriptの呼び出しコード |
-| Store | Backendからの取得と取得結果の保持 |
-| Frontend Domain Model | 生成時（`new`）にWails生成モデルをFrontend内部モデルへ変換する |
-| Wails Boundary | FrontendとBackendの呼び出しを接続する |
-| Backend側Boundary | 要求時のPublic ModelからApplication ServiceのIFに合わせた形式への変換、エラー変換、ログ出力 |
-| Application Service | 要求に応じた処理の実行と結果の返却 |
-| Public Model | FrontendとBackendの境界を越えるデータ表現 |
+| 要素                  | 責務                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------- |
+| Frontend              | Backendへの要求と、受け取った結果の利用                                                     |
+| Wails Binding         | Goで定義したBackend側Boundaryを基に、Wailsが自動生成するTypeScriptの呼び出しコード          |
+| Store                 | Backendからの取得と取得結果の保持                                                           |
+| Frontend Domain Model | 生成時（`new`）にWails生成モデルをFrontend内部モデルへ変換する                              |
+| Wails Boundary        | FrontendとBackendの呼び出しを接続する                                                       |
+| Backend側Boundary     | 要求時のPublic ModelからApplication ServiceのIFに合わせた形式への変換、エラー変換、ログ出力 |
+| Application Service   | 要求に応じた処理の実行と結果の返却                                                          |
+| Public Model          | FrontendとBackendの境界を越えるデータ表現                                                   |
 
 Frontendからの呼び出しは、Wails Binding、Wails Boundary、Backend側Boundaryを経由してBackendのApplication Serviceへ接続する。
 
 ## 3. Data Boundary
 
-| 項目 | 基本方針 |
-| --- | --- |
-| 要求データ | FrontendからBackendへ渡すデータはPublic Modelで表現する |
-| 応答データ | BackendからFrontendへ返すデータはPublic Modelで表現する |
-| 要求時の変換（Backend側） | Backend側BoundaryがPublic ModelをApplication ServiceのIFに合わせた形式へ変換する。IFには`any`型も含まれるため、変換先を特定のモデルに限定しない |
+| 項目                       | 基本方針                                                                                                                                                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 要求データ                 | FrontendからBackendへ渡すデータはPublic Modelで表現する                                                                                                                   |
+| 応答データ                 | BackendからFrontendへ返すデータはPublic Modelで表現する                                                                                                                   |
+| 要求時の変換（Backend側）  | Backend側BoundaryがPublic ModelをApplication ServiceのIFに合わせた形式へ変換する。IFには`any`型も含まれるため、変換先を特定のモデルに限定しない                           |
 | 応答時の変換（Frontend側） | Frontend Domain Modelが生成時（`new`）にWails生成モデルからFrontend内部モデルへ変換する。型定義上は`nil`を許容するが、業務上は`nil`にならない値についても、この変換で扱う |
 
 ## 4. Responsibility & Error Boundary
