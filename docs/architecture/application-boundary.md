@@ -12,10 +12,10 @@ Application Boundaryは、FrontendとBackendの接続構造および責務境界
 ## 2. Logical Structure
 
 | 要素 | 責務 |
-|---|---|
+| --- | --- |
 | Frontend | Backendへの要求と、受け取った結果の利用 |
 | Wails Binding | Goで定義したBackend側Boundaryを基に、Wailsが自動生成するTypeScriptの呼び出しコード |
-| Store | Backendからの取得と取得結果の保持 | 
+| Store | Backendからの取得と取得結果の保持 |
 | Frontend Domain Model | 生成時（`new`）にWails生成モデルをFrontend内部モデルへ変換する |
 | Wails Boundary | FrontendとBackendの呼び出しを接続する |
 | Backend側Boundary | 要求時のPublic ModelからApplication ServiceのIFに合わせた形式への変換、エラー変換、ログ出力 |
@@ -27,7 +27,7 @@ Frontendからの呼び出しは、Wails Binding、Wails Boundary、Backend側Bo
 ## 3. Data Boundary
 
 | 項目 | 基本方針 |
-|---|---|
+| --- | --- |
 | 要求データ | FrontendからBackendへ渡すデータはPublic Modelで表現する |
 | 応答データ | BackendからFrontendへ返すデータはPublic Modelで表現する |
 | 要求時の変換（Backend側） | Backend側BoundaryがPublic ModelをApplication ServiceのIFに合わせた形式へ変換する。IFには`any`型も含まれるため、変換先を特定のモデルに限定しない |
