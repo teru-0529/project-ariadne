@@ -20,3 +20,15 @@ jobs:
           node-version: "22"
       - name: Check Markdown formatting
         run: npx --yes markdownlint-cli2 "**/*.md"
+
+  link-check:
+    name: Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check local Markdown links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline "**/*.md"
+          fail: true
