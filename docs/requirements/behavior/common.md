@@ -6,7 +6,7 @@
 
 **Action**：アプリケーションを起動する
 
-**Result / Pattern — Normal**
+### Result / Pattern — Normal
 
 - Main AreaにWelcome画面を表示する。
 - Primary Navigationを未選択状態で表示する。
@@ -18,7 +18,7 @@
 
 **Action**：FooterのApp Versionバッジをクリックする。
 
-**Result / Pattern — Normal**
+### Result / Pattern — Normal
 
 - Version詳細情報のポップアップを表示する。
 - App Version、Release Date、Schema Versionを表示する。
