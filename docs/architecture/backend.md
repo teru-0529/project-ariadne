@@ -14,7 +14,7 @@ Backendは、業務ルール、処理の調整、永続化の責務を分離す�
 Backendは以下の論理要素で構成する。
 
 | 要素 | 責務 |
-|---|---|
+| --- | --- |
 | Application Service | ユースケースの実行、Business Modelの操作、永続化の調整 |
 | Business Model | 業務上の状態、ルール、整合性の管理 |
 | Persistence Port | 永続化に必要な操作の抽象化 |
@@ -27,7 +27,7 @@ Backendは以下の論理要素で構成する。
 コード上の依存関係は次の原則に従う。
 
 | 要素 | 依存関係 |
-|---|---|
+| --- | --- |
 | Application Service | Business ModelとPersistence Portに依存し、Persistence Adapterの具体的な実装には依存しない |
 | Business Model | Application ServiceやPersistence Adapterに依存しない |
 | Persistence Adapter | Persistence Portを実装し、必要に応じてBusiness Modelを参照する |
@@ -37,7 +37,7 @@ Backendは以下の論理要素で構成する。
 Backendでは、Business Modelを基に、責務に応じたデータ表現を分離する。
 
 | データ表現 | 位置づけ |
-|---|---|
+| --- | --- |
 | Business Model | 業務ルールと整合性を持つ内部表現 |
 | Public Model | Business Modelの写像として、Backendの境界を越えて公開するデータ表現 |
 | Persistence Model | Business Modelの保存に必要な情報を、永続化形式に合わせて表すデータ表現 |
