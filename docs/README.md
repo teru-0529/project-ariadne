@@ -15,20 +15,13 @@ PROJECT ARIADNEの開発ドキュメントは、次の4領域で管理する。
 
 ## Requirements
 
-Behavior一覧と機能別Behavior Mapを管理する。
-
 - [Behavior一覧](requirements/behavior-list.md)
-- [共通機能 Behavior Map](requirements/behavior/common.md)
 
 ## Design
-
-Backend Function List、および必要な詳細設計を管理する。
 
 - [Backend Function List](design/backend-function-list.md)
 
 ## Test
-
-Frontend／BackendそれぞれのTest Matrixを管理する。
 
 - [Frontend Test Matrix](test/frontend-test-matrix.md)
 - [Backend Test Matrix](test/backend-test-matrix.md)
