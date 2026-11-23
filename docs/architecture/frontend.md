@@ -14,7 +14,7 @@ Frontendは、Business Modelが表現する業務概念に基づく表示・操�
 ### Application / Shell
 
 | 構成要素 | 責務 |
-|---|---|
+| --- | --- |
 | `App` | アプリケーションの起点 |
 | `Shell` | Feature選択、Feature間の離脱調整、通知状態などのアプリケーション全体の制御 |
 | `AriadneShell` | アプリケーション共通の表示構造 |
@@ -33,7 +33,7 @@ Management
 Entry・ListTable・Viewは同じ階層に位置し、画面の用途に応じて用いる。各階層の具体的な部品は、対応するARIADNE共通構造部品を利用する。
 
 | Feature側の構成要素 | Feature側の責務 | 対応する共通構造部品とその責務 |
-|---|---|---|
+| --- | --- | --- |
 | `Management` | Feature内の画面選択、Context、離脱確認、Backend書込み実行と実行後の画面更新 | `AriadneManagement`：Side NavigationとPage領域の共通表示構造 |
 | `Page` | 画面固有の操作・状態、登録・更新要求の準備 | `AriadnePage`：タイトル、操作領域、コンテンツ領域などの共通ページ枠 |
 | `Entry` | 入力項目の構成、入力モデル・Validationとの連携 | `AriadneForm`：共通Form UI、Submit確認UIとその内部の表示制御 |
@@ -76,7 +76,7 @@ Frontend Input Modelは個々のFieldを参照し、入力全体のValidityや�
 **Validatorはチェック処理のみを担い、呼び出し元がValidityを保持する。** この責務分担はSingle ValidationとCorrelation Validationに共通する。
 
 | 区分 | チェック処理 | 呼び出し元・Validityの保持 |
-|---|---|---|
+| --- | --- | --- |
 | Single Validation | Validator | Field |
 | Correlation Validation | Validator | Entry／RowEntry |
 
@@ -101,7 +101,7 @@ StoreはBackendからのデータ取得と取得結果の保持を担う。Proto
 ### 状態の所有者
 
 | 情報 | 正本・状態の所有者 |
-|---|---|
+| --- | --- |
 | 現在画面情報 | Context |
 | Backendから取得したデータ | Store |
 | 入力中の現在値 | Field |
