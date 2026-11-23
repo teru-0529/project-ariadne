@@ -24,9 +24,3 @@ FrontendのEvent List、BackendのFunction List、および必要な詳細設計
 ## Test
 
 Frontend／BackendそれぞれのBehavior Test Matrixを管理する。個別文書は作成後にリンクを追加する。
-
----
-
-設計文書はFeature番号ではなく、設計対象や責務に応じて整理する。合意済みの現在の設計を記録し、Feature開発に合わせて拡充する。
-
-Behavior MapはFrontend／Backendをまたぐ場合も一つのBehaviorとして管理する。各Behavior Test Matrixには、担当するBehaviorだけを記載し、担当外を示すN/Aは設けない。Frontend／Backendを接続した動作は実機で確認する。
