@@ -77,7 +77,7 @@ Workspaceの設計データは、単一の`ariadne.yaml`を正本として管理
 
 設定情報には、Workspaceの利用に必要な情報や、デフォルトServiceなどの利用設定を含める。
 
-ユーザー領域の設定はWorkspaceの設計データとは独立して管理し、`ariadne.yaml`には含めない。
+ユーザー領域の設定は`ariadne.yaml`とは独立して管理し、`ariadne.yaml`には含めない。
 
 ### 生成物との関係
 
