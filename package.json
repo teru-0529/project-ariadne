@@ -1,0 +1,11 @@
+{
+  "name": "project-ariadne",
+  "private": true,
+  "devDependencies": {
+    "prettier": "3.10.1"
+  },
+  "volta": {
+    "node": "24.19.0",
+    "npm": "11.17.0"
+  }
+}
