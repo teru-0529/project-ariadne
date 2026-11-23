@@ -60,9 +60,10 @@
 | App Version | アプリケーションのリリースを識別する | `1.1.1`形式 |
 | Schema Version | `ariadne.yaml`のデータ構造のバージョンを識別する | `1.1`形式 |
 
-- App VersionはアプリケーションのFooterに表示する。
+- App VersionとSchema Versionは、アプリケーションのFooterに表示する。
 - Schema Versionは`ariadne.yaml`に記録する。
 - 両者の更新は、それぞれの変更対象に応じて判断する。
+- Schema VersionのMajor更新では、下位互換性を保証しないことを基本方針とする。
 
 バージョン間の互換性や移行方法は、必要な設計段階で定める。
 
