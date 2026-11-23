@@ -52,9 +52,9 @@ Business Model・Public Model・Frontend Domain Modelは、それぞれ異なる
 
 - [Frontend Architecture](frontend.md)
 - [Backend Architecture](backend.md)
-- [Application Boundary](boundary.md)
+- [Application Boundary](application-boundary.md)
 - [Data & Persistence](persistence.md)
-- [Cross-cutting Concerns](cross-cutting.md)
+- [Cross-cutting Concerns](cross-cutting-concerns.md)
 
 ## Source
 
