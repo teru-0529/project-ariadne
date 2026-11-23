@@ -15,7 +15,7 @@ Persistenceは、ARIADNEが扱うデータの永続化を担う。
 永続化は、Application Service、Persistence Port、Persistence Adapterを通じて実行する。
 
 | 要素 | 責務 |
-|---|---|
+| --- | --- |
 | Application Service | 永続化操作の呼び出しと処理の調整 |
 | Persistence Port | 永続化に必要な操作の抽象化 |
 | Persistence Adapter | Portの実装、保存データの読み書きと変換 |
@@ -28,7 +28,7 @@ Persistence Adapterは、必要に応じてBusiness Modelを参照し、Business
 ### 永続化対象の区分
 
 | 区分 | 対象 | 役割 |
-|---|---|---|
+| --- | --- | --- |
 | Workspace領域 | `ariadne.yaml` | 設計データの保存 |
 | ユーザー領域 | `configure.yaml` | アプリケーションの利用設定の保存 |
 
