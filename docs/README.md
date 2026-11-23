@@ -15,7 +15,7 @@ PROJECT ARIADNEの開発ドキュメントは、次の4領域で管理する。
 
 ## Requirements
 
-- [Behavior一覧](requirements/behavior-list.md)
+- [Behavior List](requirements/behavior-list.md)
 
 ## Design
 
