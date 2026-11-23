@@ -33,7 +33,7 @@ flowchart TD
 ## Responsibilities & Dependencies
 
 | 構成要素 | 基本責務 |
-|---|---|
+| --- | --- |
 | Frontend | 業務概念に基づく表示・操作、画面・操作の範囲でのValidation |
 | Wails Boundary | FrontendとBackendの接合。業務判断を持たず、Serviceへ委譲 |
 | Application Service | Business Modelを用いてユースケースを組み立てる |
@@ -55,7 +55,6 @@ Business Model・Public Model・Frontend Domain Modelは、それぞれ異なる
 - [Application Boundary](boundary.md)
 - [Data & Persistence](persistence.md)
 - [Cross-cutting Concerns](cross-cutting.md)
-
 
 ## Source
 
