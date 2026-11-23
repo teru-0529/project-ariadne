@@ -8,7 +8,7 @@ Persistenceは、ARIADNEが扱うデータの永続化を担う。
 - Persistence Adapterが保存データとの変換および読み書きを担当する。
 - Business ModelとPersistence Modelを分離し、業務上の整合性と保存形式の責務を区別する。
 - 永続化対象をWorkspace領域とユーザー領域に分け、それぞれのデータの役割と保存先を明確にする。
-- `ariadne.yaml`をWorkspaceの設計データの正本とする。
+- `ariadne.yaml`をアプリケーションが利用するデータの正本とする。
 
 ## 2. Logical Structure
 
@@ -42,7 +42,7 @@ Persistence Adapterは、必要に応じてBusiness Modelを参照し、Business
 
 1. Application ServiceがPersistence Portを介して読込を要求する。
 2. Persistence Adapterが対象の`ariadne.yaml`を読み込む。
-3. Persistence Adapterが保存データをBackendで扱うデータ表現へ変換する。
+3. Persistence Adapterが保存データをPersistence Modelとして読み取り、Business Modelへ変換する。
 4. 読み込んだデータをBusiness Modelとして利用する。
 
 ### Workspace領域の保存
@@ -68,8 +68,8 @@ Workspaceの設計データは、単一の`ariadne.yaml`を正本として管理
 
 - 既存Workspaceは、`ariadne.yaml`を指定して開く。
 - 新規Workspaceは、フォルダを指定して`ariadne.yaml`を作成する。
-- Workspaceの保存先は、ユーザーが指定した場所とする。
-- Workspaceごとに保存対象と変更検知の状態を管理する。
+- Workspaceの保存先はユーザーが指定した場所とし、その場所を`configure.yaml`で管理する。
+- Backendは外部変更検知のため、Workspace単位で`ariadne.yaml`のHashを保持する。
 
 ### ユーザー領域
 
@@ -81,11 +81,11 @@ Workspaceの設計データは、単一の`ariadne.yaml`を正本として管理
 
 ### 生成物との関係
 
-DDL、OASなどの生成物は、Workspaceの設計データから生成する。
+DDL、OASなどの生成物は、`ariadne.yaml`から生成する。
 
 生成物は`ariadne.yaml`とは区別し、正本として扱わない。
 
-生成先はWorkspace直下の`dist/`とし、生成時は既存の生成物を上書きする。
+生成先はWorkspace直下の`ariadnedist/`とし、生成時は既存の生成物を上書きする。
 
 生成処理の成功と、`ariadne.yaml`の保存成功は別の結果として扱う。
 
