@@ -1,5 +1,7 @@
 # Shell — Behavior Map
 
+<!-- markdownlint-disable MD033 -->
+
 ## B001：Welcome画面を表示する
 
 | 項目         | 内容                                                                                                                                          |
