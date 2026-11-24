@@ -1,6 +1,5 @@
 # Behavior List
 
-<!-- markdownlint-disable MD060 -->
 <!-- prettier-ignore-start -->
 
 | ID | 機能 | Behavior |
@@ -9,4 +8,3 @@
 | B002 | Shell | [Version詳細情報を表示する](behavior/shell.md#b002version詳細情報を表示する) |
 
 <!-- prettier-ignore-end -->
-<!-- markdownlint-enable MD060 -->
