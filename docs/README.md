@@ -19,7 +19,11 @@ PROJECT ARIADNEの開発ドキュメントは、次の4領域で管理する。
 
 ## Design
 
-- [Backend Function List](design/backend-function-list.md)
+- [Function List](design/function-list.md)
+
+### Specification
+
+- [Application Shell](design/specification/application-shell.md)
 
 ## Test
 
