@@ -7,12 +7,15 @@ import (
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
+// SECTION: Embedded frontend assets
 // Embed the frontend build output into the application binary.
 //
 //go:embed all:frontend/dist
 var assets embed.FS
 
+// SECTION: Application entry point
 func main() {
+	// STEP: Initialize application
 	app := application.New(application.Options{
 		Name:        "ARIADNE",
 		Description: "Design Authoring Tool",
@@ -22,6 +25,7 @@ func main() {
 		},
 	})
 
+	// STEP: Configure main window
 	app.Window.NewWithOptions(application.WebviewWindowOptions{
 		Title:            "ARIADNE",
 		Width:            1000,
@@ -30,6 +34,7 @@ func main() {
 		URL:              "/",
 	})
 
+	// STEP: Run application
 	err := app.Run()
 	if err != nil {
 		log.Fatal(err)

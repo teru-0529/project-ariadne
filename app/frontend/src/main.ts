@@ -1,4 +1,5 @@
-import { mount } from 'svelte'
-import App from './App.svelte'
+import { mount } from "svelte";
+import App from "./App.svelte";
 
-mount(App, { target: document.getElementById('app')! })
+// SECTION: Frontend entry point
+mount(App, { target: document.getElementById("app")! });
