@@ -1,0 +1,81 @@
+name: Backend Quality Check
+
+# SECTION: Workflow triggers
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+# SECTION: Permissions
+permissions:
+  contents: read
+
+# SECTION: Quality verification
+jobs:
+  backend-check:
+    name: Backend Check
+    if: ${{ github.event_name == 'push' || endsWith(github.head_ref, '-implementation') }}
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      # STEP: Prepare verification environment
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.27.0"
+          cache-dependency-path: app/go.sum
+      - name: Check tool versions
+        run: go version
+      - name: Download dependencies
+        id: prepare
+        run: go mod download
+
+      # STEP: gofmt
+      - name: Check Go formatting
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: |
+          $files = gofmt -l .
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
+          if ($files) {
+            $files
+            exit 1
+          }
+
+      # STEP: go vet
+      - name: Check Go code
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: go vet ./...
+
+  backend-test:
+    name: Backend Test
+    if: ${{ github.event_name == 'push' || endsWith(github.head_ref, '-implementation') }}
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      # STEP: Prepare verification environment
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.27.0"
+          cache-dependency-path: app/go.sum
+      - name: Check tool versions
+        run: go version
+      - name: Download dependencies
+        id: prepare
+        run: go mod download
+
+      # STEP: go test
+      - name: Run Go tests
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: go test -json ./...
