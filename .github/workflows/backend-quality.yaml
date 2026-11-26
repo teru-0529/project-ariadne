@@ -25,13 +25,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # TODO:NOTE: Temporary diagnostics for line ending investigation.
-      - name: Inspect Git line endings
-        working-directory: .
-        run: |
-          git config --show-origin --get core.autocrlf
-          git ls-files --eol -- app/main.go app/frontend/.prettierrc.json app/frontend/src/App.svelte
-
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
