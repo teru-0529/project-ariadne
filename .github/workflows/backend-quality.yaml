@@ -29,11 +29,29 @@ jobs:
         with:
           go-version: "1.27.0"
           cache-dependency-path: app/go.sum
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+      - name: Set up npm
+        run: npm install --global npm@11.17.0
       - name: Check tool versions
-        run: go version
+        run: |
+          go version
+          node --version
+          npm --version
       - name: Download dependencies
-        id: prepare
         run: go mod download
+
+      # NOTE: go vet and go test require frontend build output
+      # because main.go embeds frontend/dist using go:embed.
+      - name: Install frontend dependencies
+        working-directory: app/frontend
+        run: npm ci
+      - name: Build frontend
+        id: prepare
+        working-directory: app/frontend
+        run: npm run build
 
       # STEP: gofmt
       - name: Check Go formatting
@@ -69,11 +87,29 @@ jobs:
         with:
           go-version: "1.27.0"
           cache-dependency-path: app/go.sum
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+      - name: Set up npm
+        run: npm install --global npm@11.17.0
       - name: Check tool versions
-        run: go version
+        run: |
+          go version
+          node --version
+          npm --version
       - name: Download dependencies
-        id: prepare
         run: go mod download
+
+      # NOTE: go vet and go test require frontend build output
+      # because main.go embeds frontend/dist using go:embed.
+      - name: Install frontend dependencies
+        working-directory: app/frontend
+        run: npm ci
+      - name: Build frontend
+        id: prepare
+        working-directory: app/frontend
+        run: npm run build
 
       # STEP: go test
       - name: Run Go tests
