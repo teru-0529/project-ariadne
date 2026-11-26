@@ -40,8 +40,8 @@
     "[css]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
-    "cSpell.words": ["wailsapp", "wailsio"],
-    "cSpell.ignorePaths": ["app/frontend/bindings/**"],
+    "cSpell.words": ["ariadnedist", "wailsapp", "wailsio", "appicon", "binaryname", "macfilename", "windowsfilename"],
+    "cSpell.ignorePaths": ["**/go.mod", "**/go.sum", "**/package-lock.json", "**/*.log", "app/frontend/bindings/**"],
     "eslint.workingDirectories": ["app/frontend"],
     "eslint.validate": ["javascript", "typescript", "svelte"],
   },
