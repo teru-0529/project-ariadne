@@ -1,17 +1,23 @@
-name: Markdown Quality Check
+name: Documentation Quality Check
 
+# SECTION: Workflow triggers
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
 
+# SECTION: Permissions
 permissions:
   contents: read
 
+# SECTION: Quality verification
 jobs:
-  markdownlint:
-    name: Markdownlint
+  documentation-check:
+    name: Documentation Check
     runs-on: ubuntu-latest
     steps:
+      # STEP: Prepare verification environment
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Node.js
@@ -24,35 +30,24 @@ jobs:
         run: |
           node --version
           npm --version
+      - name: Install dependencies
+        id: prepare
+        run: npm ci
+
+      # STEP: Markdownlint
       - name: Check Markdown formatting
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         run: npx --yes markdownlint-cli2 "**/*.md"
 
-  link-check:
-    name: Link Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # STEP: Prettier
+      - name: Check Markdown formatting with Prettier
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npx --no-install prettier --check "**/*.md"
+
+      # STEP: Link Check
       - name: Check local Markdown links
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         uses: lycheeverse/lychee-action@v2
         with:
           args: --offline "**/*.md"
           fail: true
-
-  prettier-check:
-    name: Prettier Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24.19.0"
-      - name: Set up npm
-        run: npm install --global npm@11.17.0
-      - name: Install dependencies
-        run: npm ci
-      - name: Check Markdown formatting with Prettier
-        run: npx --no-install prettier --check "**/*.md"
-
