@@ -37,7 +37,7 @@ jobs:
       # STEP: Markdownlint
       - name: Check Markdown formatting
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
-        run: npx --yes markdownlint-cli2 "**/*.md"
+        run: npx --yes markdownlint-cli2 "**/*.md" "#**/node_modules/**"
 
       # STEP: Prettier
       - name: Check Markdown formatting with Prettier
@@ -49,5 +49,5 @@ jobs:
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --offline "**/*.md"
+          args: --offline --exclude-path node_modules "**/*.md"
           fail: true
