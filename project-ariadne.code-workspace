@@ -9,6 +9,7 @@
     "files.associations": {
       "LICENSE": "plaintext",
     },
+    "js/ts.tsdk.path": "app/frontend/node_modules/typescript/lib",
     "[yaml]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
@@ -18,6 +19,30 @@
     "[go]": {
       "editor.defaultFormatter": "golang.go",
     },
-    "cSpell.words": ["wailsapp", "wailsio", "gofmt"],
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[svelte]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "cSpell.words": ["wailsapp", "wailsio"],
+    "cSpell.ignorePaths": ["app/frontend/bindings/**"],
+    "eslint.workingDirectories": ["app/frontend"],
+    "eslint.validate": ["javascript", "typescript", "svelte"],
   },
 }
