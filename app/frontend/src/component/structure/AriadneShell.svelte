@@ -30,3 +30,35 @@
     <AriadnePopup />
   </footer>
 </div>
+
+<!-- BLOCK: Style -->
+<style>
+  /* SECTION: Shell Layout */
+  .ariadne-shell {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 48px minmax(0, 1fr) 24px;
+
+    overflow: hidden;
+  }
+
+  /* SECTION: Header */
+  header {
+    min-width: 0;
+  }
+
+  /* SECTION: Feature Area */
+  main {
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+  }
+
+  /* SECTION: Footer */
+  footer {
+    min-width: 0;
+  }
+</style>
