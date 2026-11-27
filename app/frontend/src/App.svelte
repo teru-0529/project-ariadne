@@ -1,1 +1,7 @@
-<h1>ARIADNE</h1>
+<!-- BLOCK: Script -->
+<script lang="ts">
+  import Shell from "./feature/shell/Shell.svelte";
+</script>
+
+<!-- BLOCK: Markup -->
+<Shell />
