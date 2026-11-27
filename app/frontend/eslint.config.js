@@ -1,7 +1,8 @@
 import js from "@eslint/js";
-import ts from "typescript-eslint";
-import svelte from "eslint-plugin-svelte";
 import prettier from "eslint-config-prettier";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import svelte from "eslint-plugin-svelte";
+import ts from "typescript-eslint";
 
 export default [
   {
@@ -19,4 +20,17 @@ export default [
     },
   },
   prettier,
+  {
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
+    rules: {
+      "simple-import-sort/imports": [
+        "error",
+        {
+          groups: [["^\\u0000"], ["^@?\\w"], ["^\\.+/.*bindings/"], ["^"]],
+        },
+      ],
+    },
+  },
 ];

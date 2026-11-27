@@ -1,6 +1,6 @@
-import { defineConfig } from "vitest/config";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { svelteTesting } from "@testing-library/svelte/vite";
+import { defineConfig } from "vitest/config";
 
 // SECTION: Vitest configuration
 export default defineConfig({
