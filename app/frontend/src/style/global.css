@@ -1,0 +1,92 @@
+:root {
+  /* SECTION: Color */
+  --color-background: #ffffff;
+  --color-surface: #f7f8fa;
+  --color-border: #d9dde5;
+  --color-text: #252a33;
+  --color-text-muted: #667085;
+  --color-accent: #315fba;
+  --color-footer: #263b5e;
+  --color-accent-light: #dce8fb;
+  --color-text-inverse: #eef2f7;
+
+  /* SECTION: Typography */
+  --font-family: "Segoe UI", "Yu Gothic UI", sans-serif;
+
+  --font-size-9: 9px;
+  --font-size-10: 10px;
+  --font-size-11: 11px;
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-20: 20px;
+  --font-size-24: 24px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-base: 1.5;
+
+  /* SECTION: Spacing */
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+}
+
+/* SECTION: Base Style */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* SECTION: Scrollbar */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
