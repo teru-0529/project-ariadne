@@ -4,6 +4,7 @@ import (
 	"embed"
 	"log"
 
+	"github.com/teru-0529/project-ariadne/app/backend/adapter/wails"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
@@ -19,7 +20,9 @@ func main() {
 	app := application.New(application.Options{
 		Name:        "ARIADNE",
 		Description: "Design Authoring Tool",
-		Services:    []application.Service{},
+		Services: []application.Service{
+			application.NewService(&wails.Configure{}),
+		},
 		Assets: application.AssetOptions{
 			Handler: application.AssetFileServerFS(assets),
 		},
