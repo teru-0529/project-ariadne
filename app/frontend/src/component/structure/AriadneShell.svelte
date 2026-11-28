@@ -2,7 +2,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-  import AriadnePopup from "../common/AriadnePopup.svelte";
   import AriadnePrimaryNavigation from "../common/AriadnePrimaryNavigation.svelte";
 
   // SECTION: Props
@@ -41,7 +40,8 @@
     <div class="copyright">© 2026 PROJECT ARIADNE</div>
 
     <div class="version">
-      <AriadnePopup />
+      <!-- TODO: Display the app version received from the parent component. -->
+      <button type="button" class="version-badge">v0.1.0</button>
     </div>
   </footer>
 </div>
@@ -166,5 +166,31 @@
   .version {
     grid-column: 3;
     justify-self: end;
+  }
+
+  /* SECTION: App Version Badge */
+  .version-badge {
+    height: 16px;
+
+    padding: 0 var(--spacing-8);
+
+    color: var(--color-text-inverse);
+    background: rgb(255 255 255 / 12%);
+    border: none;
+    border-radius: 3px;
+
+    font-size: var(--font-size-10);
+    font-weight: var(--font-weight-medium);
+
+    cursor: pointer;
+  }
+
+  .version-badge:hover {
+    background: rgb(255 255 255 / 20%);
+  }
+
+  .version-badge:focus-visible {
+    outline: 1px solid var(--color-text-inverse);
+    outline-offset: 1px;
   }
 </style>
