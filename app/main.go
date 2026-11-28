@@ -4,7 +4,9 @@ import (
 	"embed"
 	"log"
 
+	"github.com/teru-0529/project-ariadne/app/backend/adapter/persistence"
 	"github.com/teru-0529/project-ariadne/app/backend/adapter/wails"
+	"github.com/teru-0529/project-ariadne/app/backend/service"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
@@ -16,12 +18,17 @@ var assets embed.FS
 
 // SECTION: Application entry point
 func main() {
+	// STEP: Initialize dependencies
+	workspaceRepository := &persistence.WorkspaceRepository{}
+	configureService := service.NewConfigureService(workspaceRepository)
+	configure := wails.NewConfigure(configureService)
+
 	// STEP: Initialize application
 	app := application.New(application.Options{
 		Name:        "ARIADNE",
 		Description: "Design Authoring Tool",
 		Services: []application.Service{
-			application.NewService(&wails.Configure{}),
+			application.NewService(configure),
 		},
 		Assets: application.AssetOptions{
 			Handler: application.AssetFileServerFS(assets),
