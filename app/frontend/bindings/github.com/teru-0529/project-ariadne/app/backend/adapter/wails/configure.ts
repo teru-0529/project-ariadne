@@ -17,6 +17,6 @@ import * as public$0 from "../../service/public/models.js";
 /**
  * FUNCTION: Public Method
  */
-export function GetVersion(): $CancellablePromise<public$0.Version | null> {
-    return $Call.ByID(2947838562);
+export function GetApplicationInfo(): $CancellablePromise<public$0.ApplicationInfo | null> {
+    return $Call.ByID(1668120488);
 }

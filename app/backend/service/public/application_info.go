@@ -1,10 +1,12 @@
 package public
 
+import "time"
+
 // SECTION: Public Model
 
 // TYPE:
-type Version struct {
+type ApplicationInfo struct {
 	AppVersion    string // 1.0.0
-	ReleaseDate   string // YYYY-MM-DD
+	ReleaseDate   time.Time
 	SchemaVersion string // 1.0
 }
