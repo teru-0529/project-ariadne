@@ -48,7 +48,7 @@
 </script>
 
 <!-- BLOCK: Markup -->
-<AriadneShell>
+<AriadneShell {version} {copyright}>
   {#if currentFeature === "WELCOME"}
     <!-- SECTION: Welcome -->
     <div class="welcome">

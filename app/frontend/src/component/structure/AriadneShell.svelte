@@ -2,15 +2,18 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
+  import type { Version } from "../../lib/model/version";
   import AriadnePopup from "../common/AriadnePopup.svelte";
   import AriadnePrimaryNavigation from "../common/AriadnePrimaryNavigation.svelte";
 
   // SECTION: Props
   interface Props {
     children: Snippet;
+    version: Version | null;
+    copyright: string;
   }
 
-  let { children }: Props = $props();
+  let { children, version, copyright }: Props = $props();
 </script>
 
 <!-- BLOCK: Markup -->
@@ -37,35 +40,35 @@
 
   <!-- SECTION: Footer -->
   <footer>
-    <!-- TODO: Derive the copyright notice from the application release date. -->
-    <div class="copyright">© 2026 PROJECT ARIADNE</div>
+    <div class="copyright">{copyright}</div>
 
-    <div class="version">
-      <AriadnePopup>
-        {#snippet trigger()}
-          <!-- TODO: Display the app version received from the parent component. -->
-          <button type="button" class="version-badge">v0.1.0</button>
-        {/snippet}
+    {#if version !== null}
+      <div class="version">
+        <AriadnePopup>
+          {#snippet trigger()}
+            <button type="button" class="version-badge">v{version.appVersion}</button>
+          {/snippet}
 
-        {#snippet content()}
-          <!-- TODO: Display the version information received from the parent component. -->
-          <div class="version-information">
-            <h2>Version Information</h2>
+          {#snippet content()}
+            <!-- TODO: Display the version information received from the parent component. -->
+            <div class="version-information">
+              <h2>Version Information</h2>
 
-            <dl>
-              <dt>App Version</dt>
-              <dd>0.1.0</dd>
+              <dl>
+                <dt>App Version</dt>
+                <dd>0.1.0</dd>
 
-              <dt>Release Date</dt>
-              <dd>2026-11-28</dd>
+                <dt>Release Date</dt>
+                <dd>2026-11-28</dd>
 
-              <dt>Schema Version</dt>
-              <dd>1.0</dd>
-            </dl>
-          </div>
-        {/snippet}
-      </AriadnePopup>
-    </div>
+                <dt>Schema Version</dt>
+                <dd>1.0</dd>
+              </dl>
+            </div>
+          {/snippet}
+        </AriadnePopup>
+      </div>
+    {/if}
   </footer>
 </div>
 
