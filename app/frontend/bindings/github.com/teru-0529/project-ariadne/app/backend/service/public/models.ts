@@ -9,6 +9,10 @@ export interface ApplicationInfo {
      * 1.0.0
      */
     "AppVersion": string;
+
+    /**
+     * YYYY-MM-DD
+     */
     "ReleaseDate": string;
 
     /**
