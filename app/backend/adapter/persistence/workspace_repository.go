@@ -11,6 +11,7 @@ const (
 // SECTION: Repository
 
 // TYPE:
+// FUTURE: Introduce a constructor when repository initialization is required.
 type WorkspaceRepository struct{}
 
 // FUNCTION: Public Method

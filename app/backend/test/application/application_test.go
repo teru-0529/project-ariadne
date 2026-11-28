@@ -12,7 +12,6 @@ func TestGetApplicationInfo(t *testing.T) {
 	// TEST: Normal
 	t.Run("Normal", func(t *testing.T) {
 		// STEP: Arrange
-		// TODO: Use the WorkspaceRepository constructor.
 		workspaceRepository := &persistence.WorkspaceRepository{}
 		configureService := service.NewConfigureService(workspaceRepository)
 
