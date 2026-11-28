@@ -2,6 +2,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
+  import AriadnePopup from "../common/AriadnePopup.svelte";
   import AriadnePrimaryNavigation from "../common/AriadnePrimaryNavigation.svelte";
 
   // SECTION: Props
@@ -40,8 +41,30 @@
     <div class="copyright">© 2026 PROJECT ARIADNE</div>
 
     <div class="version">
-      <!-- TODO: Display the app version received from the parent component. -->
-      <button type="button" class="version-badge">v0.1.0</button>
+      <AriadnePopup>
+        {#snippet trigger()}
+          <!-- TODO: Display the app version received from the parent component. -->
+          <button type="button" class="version-badge">v0.1.0</button>
+        {/snippet}
+
+        {#snippet content()}
+          <!-- TODO: Display the version information received from the parent component. -->
+          <div class="version-information">
+            <h2>Version Information</h2>
+
+            <dl>
+              <dt>App Version</dt>
+              <dd>0.1.0</dd>
+
+              <dt>Release Date</dt>
+              <dd>2026-11-28</dd>
+
+              <dt>Schema Version</dt>
+              <dd>1.0</dd>
+            </dl>
+          </div>
+        {/snippet}
+      </AriadnePopup>
     </div>
   </footer>
 </div>
@@ -153,8 +176,6 @@
     background: var(--color-footer);
 
     font-size: var(--font-size-10);
-
-    overflow: hidden;
   }
 
   .copyright {
@@ -192,5 +213,44 @@
   .version-badge:focus-visible {
     outline: 1px solid var(--color-text-inverse);
     outline-offset: 1px;
+  }
+
+  /* SECTION: Version Information */
+  .version-information {
+    width: 180px;
+  }
+
+  .version-information h2 {
+    margin: 0 0 var(--spacing-12);
+    padding-bottom: var(--spacing-8);
+
+    border-bottom: 1px solid var(--color-border);
+
+    font-size: var(--font-size-14);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .version-information dl {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    gap: var(--spacing-8) var(--spacing-16);
+
+    margin: 0;
+
+    font-size: var(--font-size-12);
+  }
+
+  .version-information dt {
+    color: var(--color-text-muted);
+  }
+
+  .version-information dd {
+    margin: 0;
+
+    color: var(--color-text);
+
+    font-weight: var(--font-weight-medium);
+    text-align: right;
   }
 </style>
