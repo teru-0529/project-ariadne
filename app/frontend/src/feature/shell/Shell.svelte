@@ -9,7 +9,14 @@
   import { Version } from "../../lib/model/version";
 
   // SECTION: Feature
-  type Feature = "WELCOME" | "ELEMENTS" | "DB" | "API" | "CONFIG";
+  const navigationItems = [
+    { id: "ELEMENTS", label: "Elements" },
+    { id: "DB", label: "DB" },
+    { id: "API", label: "API" },
+    { id: "CONFIG", label: "Config" },
+  ] as const;
+
+  type Feature = "WELCOME" | (typeof navigationItems)[number]["id"];
 
   let currentFeature: Feature = $state("WELCOME");
 
@@ -45,10 +52,21 @@
       applicationInfo = null;
     }
   }
+
+  // SECTION: Events
+
+  // FUNCTION: Select feature
+  function selectFeature(id: string): void {
+    const item = navigationItems.find((item) => item.id === id);
+
+    if (item !== undefined) {
+      currentFeature = item.id;
+    }
+  }
 </script>
 
 <!-- BLOCK: Markup -->
-<AriadneShell {version} {copyright}>
+<AriadneShell {version} {copyright} {navigationItems} {currentFeature} onFeatureSelect={selectFeature}>
   {#if currentFeature === "WELCOME"}
     <!-- SECTION: Welcome -->
     <div class="welcome">
@@ -57,7 +75,7 @@
     </div>
   {:else}
     <!-- SECTION: Feature Content -->
-    <!-- TODO: Render the selected feature content. -->
+    <!-- FUTURE: Render the selected feature content when each feature is implemented. -->
     {currentFeature}
   {/if}
 </AriadneShell>

@@ -1,16 +1,25 @@
 <!-- BLOCK: Script -->
 <script lang="ts">
-  // SECTION: Navigation Items
-  // TODO: Receive navigation items and selection state from the parent component.
-  const items = ["Elements", "DB", "API", "Config"];
-  const current: string | null = null;
+  // SECTION: Props
+  interface Props {
+    items: readonly { id: string; label: string }[];
+    current: string;
+    onSelect: (id: string) => void;
+  }
+
+  let { items, current, onSelect }: Props = $props();
 </script>
 
 <!-- BLOCK: Markup -->
 <nav class="primary-navigation" aria-label="Primary Navigation">
-  {#each items as item (item)}
-    <button type="button" class:current={current === item} aria-current={current === item ? "page" : undefined}>
-      {item}
+  {#each items as item (item.id)}
+    <button
+      type="button"
+      class:current={current === item.id}
+      aria-current={current === item.id ? "page" : undefined}
+      onclick={() => onSelect(item.id)}
+    >
+      {item.label}
     </button>
   {/each}
 </nav>

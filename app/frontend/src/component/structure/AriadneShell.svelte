@@ -7,13 +7,17 @@
   import AriadnePrimaryNavigation from "../common/AriadnePrimaryNavigation.svelte";
 
   // SECTION: Props
+  // SECTION: Props
   interface Props {
     children: Snippet;
     version: Version | null;
     copyright: string;
+    navigationItems: readonly { id: string; label: string }[];
+    currentFeature: string;
+    onFeatureSelect: (id: string) => void;
   }
 
-  let { children, version, copyright }: Props = $props();
+  let { children, version, copyright, navigationItems, currentFeature, onFeatureSelect }: Props = $props();
 </script>
 
 <!-- BLOCK: Markup -->
@@ -30,7 +34,7 @@
       </div>
     </div>
 
-    <AriadnePrimaryNavigation />
+    <AriadnePrimaryNavigation items={navigationItems} current={currentFeature} onSelect={onFeatureSelect} />
   </header>
 
   <!-- SECTION: Feature Area -->
