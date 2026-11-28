@@ -33,6 +33,8 @@ func main() {
 		Title:            "ARIADNE",
 		Width:            1000,
 		Height:           618,
+		MinWidth:         960,
+		MinHeight:        600,
 		BackgroundColour: application.NewRGB(255, 255, 255),
 		URL:              "/",
 	})
