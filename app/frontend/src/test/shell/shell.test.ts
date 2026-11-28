@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/svelte";
+import { fireEvent, render, screen, within } from "@testing-library/svelte";
 import { describe, expect, test, vi } from "vitest";
 
 import { GetApplicationInfo } from "../../../bindings/github.com/teru-0529/project-ariadne/app/backend/adapter/wails/configure";
@@ -7,19 +7,32 @@ import App from "../../App.svelte";
 
 vi.mock("../../../bindings/github.com/teru-0529/project-ariadne/app/backend/adapter/wails/configure");
 
+// SECTION: Test Helpers
+
+// FUNCTION: Mock
+function mockGetApplicationInfo(): void {
+  vi.mocked(GetApplicationInfo).mockImplementation(
+    () =>
+      Promise.resolve({
+        AppVersion: "1.2.3",
+        ReleaseDate: "2027-01-01",
+        SchemaVersion: "1.0",
+      }) as ReturnType<typeof GetApplicationInfo>,
+  );
+}
+
+// FUNCTION: Precondition
+// NOTE: B001 / Normal - Welcome画面を表示する
+function givenB001Normal(): void {
+  render(App);
+}
+
 // SECTION: Shell Test
 describe("Welcome画面を表示する", () => {
   // TEST: Normal
   test("Normal", async () => {
     // STEP: Arrange
-    vi.mocked(GetApplicationInfo).mockImplementation(
-      () =>
-        Promise.resolve({
-          AppVersion: "1.2.3",
-          ReleaseDate: "2027-01-01",
-          SchemaVersion: "1.0",
-        }) as ReturnType<typeof GetApplicationInfo>,
-    );
+    mockGetApplicationInfo();
 
     // STEP: Act
     render(App);
@@ -47,5 +60,34 @@ describe("Welcome画面を表示する", () => {
     // NOTE: Copyright
     const expectedCopyright = "© 2026-2027 PROJECT ARIADNE";
     expect(await within(footer).findByText(expectedCopyright)).toBeVisible();
+  });
+});
+
+describe("Version詳細情報を表示する", () => {
+  // TEST: Normal
+  test("Normal", async () => {
+    // STEP: Arrange
+    mockGetApplicationInfo();
+    givenB001Normal();
+
+    // STEP: Act
+    await fireEvent.click(await within(screen.getByRole("contentinfo")).findByRole("button", { name: "v1.2.3" }));
+
+    // STEP: Assert
+    // NOTE: Version information popup
+    const footer = screen.getByRole("contentinfo");
+    expect(within(footer).getByRole("heading", { name: "Version Information" })).toBeVisible();
+
+    // NOTE: App version
+    const expectedAppVersion = "1.2.3";
+    expect(within(footer).getByText(expectedAppVersion, { exact: true })).toBeVisible();
+
+    // NOTE: Release date
+    const expectedReleaseDate = "2027-01-01";
+    expect(within(footer).getByText(expectedReleaseDate, { exact: true })).toBeVisible();
+
+    // NOTE: Schema version
+    const expectedSchemaVersion = "1.0";
+    expect(within(footer).getByText(expectedSchemaVersion, { exact: true })).toBeVisible();
   });
 });
