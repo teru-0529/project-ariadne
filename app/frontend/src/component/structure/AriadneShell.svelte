@@ -7,7 +7,6 @@
   import AriadnePrimaryNavigation from "../common/AriadnePrimaryNavigation.svelte";
 
   // SECTION: Props
-  // SECTION: Props
   interface Props {
     children: Snippet;
     version: Version | null;
