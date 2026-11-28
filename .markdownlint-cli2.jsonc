@@ -2,6 +2,8 @@
   "config": {
     "default": true,
     // 日本語の設計文書では80文字制限が可読性を損なうため無効化する。
-    "MD013": false
+    "MD013": false,
+    // 表の列幅調整を不要とし、Markdownの可読性を維持する。
+    "MD060": false
   }
 }

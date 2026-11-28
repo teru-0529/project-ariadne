@@ -13,11 +13,15 @@ Frontendは、Business Modelが表現する業務概念に基づく表示・操�
 
 ### Application / Shell
 
-| 構成要素       | 責務                                                                       |
-| -------------- | -------------------------------------------------------------------------- |
-| `App`          | アプリケーションの起点                                                     |
-| `Shell`        | Feature選択、Feature間の離脱調整、通知状態などのアプリケーション全体の制御 |
-| `AriadneShell` | アプリケーション共通の表示構造                                             |
+<!-- prettier-ignore-start -->
+
+| 構成要素 | 責務 |
+| --- | --- |
+| `App` | アプリケーションの起点 |
+| `Shell` | Feature選択、Feature間の離脱調整、通知状態などのアプリケーション全体の制御 |
+| `AriadneShell` | アプリケーション共通の表示構造 |
+
+<!-- prettier-ignore-end -->
 
 ### Management / Page / Entry・ListTable・View / Field
 
@@ -32,13 +36,17 @@ Management
 
 Entry・ListTable・Viewは同じ階層に位置し、画面の用途に応じて用いる。各階層の具体的な部品は、対応するARIADNE共通構造部品を利用する。
 
-| Feature側の構成要素  | Feature側の責務                                                             | 対応する共通構造部品とその責務                                      |
-| -------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `Management`         | Feature内の画面選択、Context、離脱確認、Backend書込み実行と実行後の画面更新 | `AriadneManagement`：Side NavigationとPage領域の共通表示構造        |
-| `Page`               | 画面固有の操作・状態、登録・更新要求の準備                                  | `AriadnePage`：タイトル、操作領域、コンテンツ領域などの共通ページ枠 |
-| `Entry`              | 入力項目の構成、入力モデル・Validationとの連携                              | `AriadneForm`：共通Form UI、Submit確認UIとその内部の表示制御        |
-| `ListTable` / `View` | 一覧・参照に関するFeature固有の情報と操作判断                               | `AriadneListTable` / `AriadneView`：共通表示構造とイベント通知      |
-| `Field`              | 入力値、単項目Validity、入力・検証に関する具体的な振る舞い                  | `AriadneField`：共通表示構造とエラー表示。Validityは保持しない      |
+<!-- prettier-ignore-start -->
+
+| Feature側の構成要素 | Feature側の責務 | 対応する共通構造部品とその責務 |
+| --- | --- | --- |
+| `Management` | Feature内の画面選択、Context、離脱確認、Backend書込み実行と実行後の画面更新 | `AriadneManagement`：Side NavigationとPage領域の共通表示構造 |
+| `Page` | 画面固有の操作・状態、登録・更新要求の準備 | `AriadnePage`：タイトル、操作領域、コンテンツ領域などの共通ページ枠 |
+| `Entry` | 入力項目の構成、入力モデル・Validationとの連携 | `AriadneForm`：共通Form UI、Submit確認UIとその内部の表示制御 |
+| `ListTable` / `View` | 一覧・参照に関するFeature固有の情報と操作判断 | `AriadneListTable` / `AriadneView`：共通表示構造とイベント通知 |
+| `Field` | 入力値、単項目Validity、入力・検証に関する具体的な振る舞い | `AriadneField`：共通表示構造とエラー表示。Validityは保持しない |
+
+<!-- prettier-ignore-end -->
 
 Pageは描画専用ではない。登録・更新ではPageが入力モデルから要求を準備し、ManagementがBackendへの書込みと成功後の画面更新を制御する。
 
@@ -47,7 +55,7 @@ Pageは描画専用ではない。登録・更新ではPageが入力モデルか
 ARIADNE共通部品は、**Featureの構造階層に対応する共通構造部品**と、**階層に依存せず利用する共通利用部品**に分けて整理する。
 
 - **共通構造部品**：`AriadneShell`、`AriadneManagement`、`AriadnePage`、`AriadneForm`、`AriadneListTable`、`AriadneView`、`AriadneField`など。各階層の具体的な部品と組み合わせて、共通の表示構造を提供する。
-- **共通利用部品**：`AriadneSideNavigation`、`AriadneModal`、`AriadneToast`、`AriadneToggle`、`AriadnePrimeNavigation`、`AriadneButton`など。Featureの構造階層そのものを表すものではなく、必要な場所から利用する。
+- **共通利用部品**：`AriadneSideNavigation`、`AriadneModal`、`AriadneToast`、`AriadneToggle`、`AriadnePrimaryNavigation`、`AriadneButton`など。Featureの構造階層そのものを表すものではなく、必要な場所から利用する。
 
 Fieldには、`TextField`などの汎用Fieldと、`TaskStatusField`などのFeature固有Fieldがある。汎用Fieldで対応できる場合はそれを利用し、業務固有の入力・検証が必要な場合は固有Fieldを設ける。どちらもFeature側の入力・Validationに関する責務を担う。
 
@@ -75,10 +83,14 @@ Frontend Input Modelは個々のFieldを参照し、入力全体のValidityや�
 
 **Validatorはチェック処理のみを担い、呼び出し元がValidityを保持する。** この責務分担はSingle ValidationとCorrelation Validationに共通する。
 
-| 区分                   | チェック処理 | 呼び出し元・Validityの保持 |
-| ---------------------- | ------------ | -------------------------- |
-| Single Validation      | Validator    | Field                      |
-| Correlation Validation | Validator    | Entry／RowEntry            |
+<!-- prettier-ignore-start -->
+
+| 区分 | チェック処理 | 呼び出し元・Validityの保持 |
+| --- | --- | --- |
+| Single Validation | Validator | Field |
+| Correlation Validation | Validator | Entry／RowEntry |
+
+<!-- prettier-ignore-end -->
 
 Single ValidationではFieldがValidatorを呼び出して結果を保持する。Correlation ValidationではEntry、表形式編集ではRowEntryがValidatorを呼び出して結果を保持する。Validator自身はValidityの状態を保持しない。
 
@@ -98,17 +110,23 @@ StoreはBackendからのデータ取得と取得結果の保持を担う。Proto
 
 ただし、**すべての画面にStoreを必須とはしない**。Backend取得データを前提としない新規作成画面などでは、画面の性質に応じてStoreの要否を判断する。
 
+Shellが取得する情報であり、データの共有や更新管理を必要としない特殊なケースでは、設計上の合意に基づき、例外としてStoreを介さずに取得・保持することを認める。
+
 ### 状態の所有者
 
-| 情報                      | 正本・状態の所有者 |
-| ------------------------- | ------------------ |
-| 現在画面情報              | Context            |
-| Backendから取得したデータ | Store              |
-| 入力中の現在値            | Field              |
-| 単項目Validity            | Field              |
-| 相関Validity              | Entry／RowEntry    |
-| 通知内容・表示状態        | Shell              |
-| Toastの表示時間           | AriadneToast       |
+<!-- prettier-ignore-start -->
+
+| 情報 | 正本・状態の所有者 |
+| --- | --- |
+| 現在画面情報 | Context |
+| Backendから取得したデータ | Store |
+| 入力中の現在値 | Field |
+| 単項目Validity | Field |
+| 相関Validity | Entry／RowEntry |
+| 通知内容・表示状態 | Shell |
+| Toastの表示時間 | AriadneToast |
+
+<!-- prettier-ignore-end -->
 
 Frontend Domain Modelは取得データを業務概念として表現し、入力モデルはField等の状態を集約する。これらの役割を、状態の重複保持と混同しない。
 
@@ -120,6 +138,8 @@ Frontend Domain Modelは取得データを業務概念として表現し、入�
 2. StoreがBackendから取得したデータを保持する。
 3. Frontend Domain ModelがWails生成モデルからFrontend側の業務モデルへの変換を担う。
 4. PageやEntryはFrontend側の業務モデルに基づいて表示・操作する。
+
+Shellが取得する情報については、設計上の合意に基づき、例外として専用のBinding TSを設けず、Wails Bindingを直接呼び出すことを認める。
 
 ### 登録・更新
 

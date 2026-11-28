@@ -13,12 +13,16 @@ Backendは、業務ルール、処理の調整、永続化の責務を分離す�
 
 Backendは以下の論理要素で構成する。
 
-| 要素                | 責務                                                   |
-| ------------------- | ------------------------------------------------------ |
+<!-- prettier-ignore-start -->
+
+| 要素 | 責務 |
+| --- | --- |
 | Application Service | ユースケースの実行、Business Modelの操作、永続化の調整 |
-| Business Model      | 業務上の状態、ルール、整合性の管理                     |
-| Persistence Port    | 永続化に必要な操作の抽象化                             |
-| Persistence Adapter | Persistence Portの実装、保存データとの変換             |
+| Business Model | 業務上の状態、ルール、整合性の管理 |
+| Persistence Port | 永続化に必要な操作の抽象化 |
+| Persistence Adapter | Persistence Portの実装、保存データとの変換 |
+
+<!-- prettier-ignore-end -->
 
 これらは論理的な責務の区分であり、パッケージ構成やファイル構成を直接規定するものではない。
 
@@ -26,21 +30,29 @@ Backendは以下の論理要素で構成する。
 
 コード上の依存関係は次の原則に従う。
 
-| 要素                | 依存関係                                                                                  |
-| ------------------- | ----------------------------------------------------------------------------------------- |
+<!-- prettier-ignore-start -->
+
+| 要素 | 依存関係 |
+| --- | --- |
 | Application Service | Business ModelとPersistence Portに依存し、Persistence Adapterの具体的な実装には依存しない |
-| Business Model      | Application ServiceやPersistence Adapterに依存しない                                      |
-| Persistence Adapter | Persistence Portを実装し、必要に応じてBusiness Modelを参照する                            |
+| Business Model | Application ServiceやPersistence Adapterに依存しない |
+| Persistence Adapter | Persistence Portを実装し、必要に応じてBusiness Modelを参照する |
+
+<!-- prettier-ignore-end -->
 
 ## 4. Data Representation
 
 Backendでは、Business Modelを基に、責務に応じたデータ表現を分離する。
 
-| データ表現        | 位置づけ                                                               |
-| ----------------- | ---------------------------------------------------------------------- |
-| Business Model    | 業務ルールと整合性を持つ内部表現                                       |
-| Public Model      | Business Modelの写像として、Backendの境界を越えて公開するデータ表現    |
+<!-- prettier-ignore-start -->
+
+| データ表現 | 位置づけ |
+| --- | --- |
+| Business Model | 業務ルールと整合性を持つ内部表現 |
+| Public Model | Business Modelの写像として、Backendの境界を越えて公開するデータ表現 |
 | Persistence Model | Business Modelの保存に必要な情報を、永続化形式に合わせて表すデータ表現 |
+
+<!-- prettier-ignore-end -->
 
 Public ModelとPersistence ModelはBusiness Modelに対応するが、公開や保存に必要な情報・構造はそれぞれ異なる。そのため、Business Modelそのものを公開・保存用のデータ表現として兼用することは前提としない。
 
