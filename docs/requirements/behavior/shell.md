@@ -10,7 +10,7 @@
 | --- | --- |
 | Precondition | なし |
 | Action | アプリケーションを起動する |
-| Result | **Normal**<br>・Main AreaにWelcome画面を表示する。<br>・Primary Navigationを未選択状態で表示する。<br>・FooterにApp Versionバッジを表示する。 |
+| Result | **Normal**<br>・Main AreaにWelcome画面を表示する。<br>・Primary Navigationを未選択状態で表示する。<br>・FooterにApp Versionバッジを表示する。<br>・FooterにCopyrightを表示する。 |
 
 <!-- prettier-ignore-end -->
 
