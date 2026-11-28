@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import svelte from "eslint-plugin-svelte";
+import globals from "globals";
 import ts from "typescript-eslint";
 
 export default [
@@ -14,9 +15,13 @@ export default [
   {
     files: ["**/*.svelte"],
     languageOptions: {
+      globals: globals.browser,
       parserOptions: {
         parser: ts.parser,
       },
+    },
+    rules: {
+      "no-undef": "off",
     },
   },
   prettier,

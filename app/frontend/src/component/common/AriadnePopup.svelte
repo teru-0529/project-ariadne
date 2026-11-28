@@ -4,23 +4,44 @@
 
   // SECTION: Props
   interface Props {
-    trigger: Snippet;
+    trigger: Snippet<[() => void]>;
     content: Snippet;
   }
 
   let { trigger, content }: Props = $props();
+
+  // SECTION: Popup
+  let isOpen = $state(false);
+  let popupElement: HTMLDivElement | undefined = $state();
+
+  // SECTION: Events
+
+  // FUNCTION: Toggle popup
+  function togglePopup(): void {
+    isOpen = !isOpen;
+  }
+
+  // FUNCTION: Close popup on outside click
+  function handleOutsideClick(event: MouseEvent): void {
+    if (isOpen && event.target instanceof Node && !popupElement?.contains(event.target)) {
+      isOpen = false;
+    }
+  }
 </script>
 
 <!-- BLOCK: Markup -->
-<div class="popup">
+<svelte:window onclick={handleOutsideClick} />
+
+<div class="popup" bind:this={popupElement}>
   <!-- SECTION: Trigger -->
-  {@render trigger()}
+  {@render trigger(togglePopup)}
 
   <!-- SECTION: Content -->
-  <!-- TODO: Control popup visibility through internal open state. -->
-  <div class="popup-content">
-    {@render content()}
-  </div>
+  {#if isOpen}
+    <div class="popup-content">
+      {@render content()}
+    </div>
+  {/if}
 </div>
 
 <!-- BLOCK: Style -->

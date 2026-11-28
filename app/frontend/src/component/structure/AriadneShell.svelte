@@ -48,8 +48,8 @@
     {#if version !== null}
       <div class="version">
         <AriadnePopup>
-          {#snippet trigger()}
-            <button type="button" class="version-badge">v{version.appVersion}</button>
+          {#snippet trigger(togglePopup)}
+            <button type="button" class="version-badge" onclick={togglePopup}>v{version.appVersion}</button>
           {/snippet}
 
           {#snippet content()}
