@@ -9,15 +9,49 @@
     "files.associations": {
       "LICENSE": "plaintext",
     },
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnType": true,
-    "prettier.requireConfig": true,
+    "js/ts.tsdk.path": "app/frontend/node_modules/typescript/lib",
     "[yaml]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[markdown]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
+    "[go]": {
+      "editor.defaultFormatter": "golang.go",
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[svelte]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "cSpell.words": [
+      "ariadnedist",
+      "wailsapp",
+      "wailsio",
+      "appicon",
+      "binaryname",
+      "macfilename",
+      "windowsfilename",
+      "contentinfo",
+    ],
+    "cSpell.ignorePaths": ["**/go.mod", "**/go.sum", "**/package-lock.json", "**/*.log", "app/frontend/bindings/**"],
+    "eslint.workingDirectories": ["app/frontend"],
+    "eslint.validate": ["javascript", "typescript", "svelte"],
   },
 }

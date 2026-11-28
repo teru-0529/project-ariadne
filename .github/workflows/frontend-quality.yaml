@@ -1,0 +1,89 @@
+name: Frontend Quality Check
+
+# SECTION: Workflow triggers
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+# SECTION: Permissions
+permissions:
+  contents: read
+
+# SECTION: Quality verification
+jobs:
+  frontend-check:
+    name: Frontend Check
+    if: ${{ github.event_name == 'push' || endsWith(github.head_ref, '-implementation') }}
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app/frontend
+    steps:
+      # STEP: Prepare verification environment
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+      - name: Set up npm
+        run: npm install --global npm@11.17.0
+      - name: Check tool versions
+        run: |
+          node --version
+          npm --version
+      - name: Install dependencies
+        id: prepare
+        run: npm ci
+
+      # STEP: Prettier
+      - name: Check frontend formatting
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run check:prettier
+
+      # STEP: Svelte Check
+      - name: Check Svelte code
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run check:svelte
+
+      # STEP: TypeScript
+      - name: Check TypeScript code
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run check:tsc
+
+      # STEP: ESLint
+      - name: Check frontend code
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run check:eslint
+
+  frontend-test:
+    name: Frontend Test
+    if: ${{ github.event_name == 'push' || endsWith(github.head_ref, '-implementation') }}
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app/frontend
+    steps:
+      # STEP: Prepare verification environment
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.19.0"
+      - name: Set up npm
+        run: npm install --global npm@11.17.0
+      - name: Check tool versions
+        run: |
+          node --version
+          npm --version
+      - name: Install dependencies
+        id: prepare
+        run: npm ci
+
+      # STEP: Vitest
+      - name: Run frontend tests
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm test
