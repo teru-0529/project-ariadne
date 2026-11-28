@@ -16,8 +16,14 @@ Featureの選択状態はShell内で管理する。
 
 ## 3. Version Information
 
-FooterにApp Versionを表示する。クリックするとPopupを開き、Version情報を表示する。
+FooterにApp Versionを表示する。クリックするとPopupを開き、詳細情報を表示する。
 
-Version情報のうち、App VersionとRelease Dateはビルド時に確定する。Schema VersionはYAMLの読み書きを担当するAdapterが保持する。
+詳細情報には、ビルド時に確定するApp VersionとRelease Date、YAMLの読み書きを担当するAdapterが保持するSchema Versionが含まれる。
 
-BackendはVersion情報を集約して公開し、Frontendは起動時に非同期で取得する。
+Backendはこれらをアプリケーション情報として集約・公開し、Frontendは起動時に非同期で取得する。
+
+## 4. Copyright
+
+FooterにCopyrightを表示する。
+
+開始年は2026年とし、終了年はアプリケーション情報のRelease Dateから導出する。同一年の場合は単年表記とする。
