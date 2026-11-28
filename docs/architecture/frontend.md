@@ -139,6 +139,8 @@ Frontend Domain Modelは取得データを業務概念として表現し、入�
 3. Frontend Domain ModelがWails生成モデルからFrontend側の業務モデルへの変換を担う。
 4. PageやEntryはFrontend側の業務モデルに基づいて表示・操作する。
 
+Shellが取得する情報については、設計上の合意に基づき、例外として専用のBinding TSを設けず、Wails Bindingを直接呼び出すことを認める。
+
 ### 登録・更新
 
 1. Pageが入力モデルを参照し、登録・更新要求を準備する。
