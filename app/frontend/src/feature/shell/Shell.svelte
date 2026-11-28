@@ -1,11 +1,50 @@
 <!-- BLOCK: Script -->
 <script lang="ts">
+  import { onMount } from "svelte";
+
+  import { GetApplicationInfo } from "../../../bindings/github.com/teru-0529/project-ariadne/app/backend/adapter/wails/configure";
+  import type { ApplicationInfo } from "../../../bindings/github.com/teru-0529/project-ariadne/app/backend/service/public/models";
+
   import AriadneShell from "../../component/structure/AriadneShell.svelte";
+  import { Version } from "../../lib/model/version";
 
   // SECTION: Feature
   type Feature = "WELCOME" | "ELEMENTS" | "DB" | "API" | "CONFIG";
 
   let currentFeature: Feature = $state("WELCOME");
+
+  // SECTION: Application Information
+  let applicationInfo: ApplicationInfo | null = $state(null);
+
+  let version = $derived.by(() => {
+    if (applicationInfo === null) {
+      return null;
+    }
+    return new Version(applicationInfo.AppVersion, applicationInfo.ReleaseDate, applicationInfo.SchemaVersion);
+  });
+
+  let copyright = $derived.by(() => {
+    const startYear = "2026";
+    const releaseYear = applicationInfo?.ReleaseDate.slice(0, 4) ?? startYear;
+    const years = releaseYear === startYear ? startYear : `${startYear}-${releaseYear}`;
+    return `© ${years} PROJECT ARIADNE`;
+  });
+
+  // SECTION: Lifecycle
+  onMount(() => {
+    void loadApplicationInfo();
+  });
+
+  // FUNCTION: Load application information
+  async function loadApplicationInfo(): Promise<void> {
+    try {
+      applicationInfo = await GetApplicationInfo();
+    } catch {
+      // NOTE: Failure to retrieve application information does not prevent application startup.
+      // FUTURE: Log the error when frontend logging is introduced.
+      applicationInfo = null;
+    }
+  }
 </script>
 
 <!-- BLOCK: Markup -->
