@@ -55,7 +55,7 @@ Pageは描画専用ではない。登録・更新ではPageが入力モデルか
 ARIADNE共通部品は、**Featureの構造階層に対応する共通構造部品**と、**階層に依存せず利用する共通利用部品**に分けて整理する。
 
 - **共通構造部品**：`AriadneShell`、`AriadneManagement`、`AriadnePage`、`AriadneForm`、`AriadneListTable`、`AriadneView`、`AriadneField`など。各階層の具体的な部品と組み合わせて、共通の表示構造を提供する。
-- **共通利用部品**：`AriadneSideNavigation`、`AriadneModal`、`AriadneToast`、`AriadneToggle`、`AriadnePrimeNavigation`、`AriadneButton`など。Featureの構造階層そのものを表すものではなく、必要な場所から利用する。
+- **共通利用部品**：`AriadneSideNavigation`、`AriadneModal`、`AriadneToast`、`AriadneToggle`、`AriadnePrimaryNavigation`、`AriadneButton`など。Featureの構造階層そのものを表すものではなく、必要な場所から利用する。
 
 Fieldには、`TextField`などの汎用Fieldと、`TaskStatusField`などのFeature固有Fieldがある。汎用Fieldで対応できる場合はそれを利用し、業務固有の入力・検証が必要な場合は固有Fieldを設ける。どちらもFeature側の入力・Validationに関する責務を担う。
 
