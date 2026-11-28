@@ -53,19 +53,18 @@
           {/snippet}
 
           {#snippet content()}
-            <!-- TODO: Display the version information received from the parent component. -->
             <div class="version-information">
               <h2>Version Information</h2>
 
               <dl>
                 <dt>App Version</dt>
-                <dd>0.1.0</dd>
+                <dd>{version.appVersion}</dd>
 
                 <dt>Release Date</dt>
-                <dd>2026-11-28</dd>
+                <dd>{version.releaseDate}</dd>
 
                 <dt>Schema Version</dt>
-                <dd>1.0</dd>
+                <dd>{version.schemaVersion}</dd>
               </dl>
             </div>
           {/snippet}
