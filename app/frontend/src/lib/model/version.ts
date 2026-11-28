@@ -2,9 +2,9 @@
 
 // TYPE:
 export class Version {
-  readonly appVersion: string = "";
-  readonly releaseDate: string = "";
-  readonly schemaVersion: string = "";
+  readonly appVersion: string;
+  readonly releaseDate: string;
+  readonly schemaVersion: string;
 
   // FUNCTION: Constructor
   constructor(appVersion: string, releaseDate: string, schemaVersion: string) {
