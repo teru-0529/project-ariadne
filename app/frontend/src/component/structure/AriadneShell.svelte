@@ -37,7 +37,12 @@
 
   <!-- SECTION: Footer -->
   <footer>
-    <AriadnePopup />
+    <!-- TODO: Derive the copyright notice from the application release date. -->
+    <div class="copyright">© 2026 PROJECT ARIADNE</div>
+
+    <div class="version">
+      <AriadnePopup />
+    </div>
   </footer>
 </div>
 
@@ -137,5 +142,29 @@
   /* SECTION: Footer */
   footer {
     min-width: 0;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+
+    padding: 0 var(--spacing-12);
+
+    color: var(--color-text-inverse);
+    background: var(--color-footer);
+
+    font-size: var(--font-size-10);
+
+    overflow: hidden;
+  }
+
+  .copyright {
+    grid-column: 2;
+
+    white-space: nowrap;
+  }
+
+  .version {
+    grid-column: 3;
+    justify-self: end;
   }
 </style>
